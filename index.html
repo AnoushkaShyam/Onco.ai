@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onco.AI | Computational Oncology Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="app-shell">
+      <header class="hero">
+        <nav class="topbar">
+          <div class="brand">
+            <span class="brand-mark">Onco.AI</span>
+            <span class="brand-subtitle">Computational oncology assistant</span>
+          </div>
+          <div class="topbar-controls">
+            <label class="sr-only" for="language-select">Language</label>
+            <select id="language-select" class="language-select" aria-label="Select language">
+              <option value="en" selected>English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="hi">हिन्दी</option>
+              <option value="ar">العربية</option>
+            </select>
+            <div class="topbar-note" data-i18n="topbarNote">Educational and interpretive only</div>
+          </div>
+        </nav>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="eyebrowAssistant">Computational oncology assistant</p>
+            <h1 data-i18n="heroTitle">Live genomic interpretation with plain-language explanations.</h1>
+            <p class="hero-text" data-i18n="heroText">
+              Onco.AI now connects live public genomic data sources through a local
+              backend, then translates gene and variant evidence into clear everyday
+              understanding for educational use.
+            </p>
+            <div class="hero-actions">
+              <a href="#learn" class="button button-primary" data-i18n="navLearn">Learn</a>
+              <a href="#analyze" class="button button-secondary" data-i18n="navAnalyze">Analyze</a>
+              <a href="#support" class="button button-secondary" data-i18n="navSupport">Support</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="panel-label" data-i18n="panelSystemDesign">Live evidence stack</div>
+            <div class="system-stack">
+              <div class="stack-card">
+                <h2 data-i18n="stackComputationTitle">1. Genomic data layer</h2>
+                <p data-i18n="stackComputationText">
+                  Queries MyGene.info, Ensembl, and MyVariant.info through a local
+                  proxy so the app can resolve live gene and variant information.
+                </p>
+              </div>
+              <div class="stack-card">
+                <h2 data-i18n="stackTranslationTitle">2. Interpretation layer</h2>
+                <p data-i18n="stackTranslationText">
+                  Combines live genomic evidence with symptom and context scoring to
+                  generate transparent educational reasoning.
+                </p>
+              </div>
+              <div class="stack-card">
+                <h2 data-i18n="stackDataTitle">3. Translation layer</h2>
+                <p data-i18n="stackDataText">
+                  Converts structured biomedical output into plain-language explanations,
+                  practical takeaways, and follow-up support guidance.
+                </p>
+              </div>
+            </div>
+            <p class="disclaimer-inline" data-i18n="heroDisclaimer">
+              This application is not a diagnostic or treatment tool. It is designed
+              for educational interpretation only.
+            </p>
+          </aside>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section id="learn" class="section">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="learnEyebrow">Learn</p>
+            <h2 data-i18n="learnTitle">Core oncology concepts, explained simply.</h2>
+            <p data-i18n="learnText">
+              Short explainers help users build context before exploring mutations,
+              symptoms, or care-related questions.
+            </p>
+          </div>
+          <div id="learn-grid" class="card-grid"></div>
+        </section>
+
+        <section id="analyze" class="section analyze-layout">
+          <div class="section-heading analyze-heading">
+            <div>
+              <p class="eyebrow" data-i18n="analyzeEyebrow">Analyze</p>
+              <h2 data-i18n="analyzeTitle">Search a real human gene, optionally add a variant, then interpret it.</h2>
+            </div>
+            <p data-i18n="analyzeText">
+              Enter a gene symbol such as TP53 or BRCA1. You can also provide a
+              variant identifier like an rsID to pull live annotation from public
+              genomics services.
+            </p>
+          </div>
+
+          <div class="analyze-grid">
+            <form id="analyzer-form" class="analyzer-panel" aria-describedby="analyzer-note">
+              <p id="analyzer-note" class="assistive-note" data-i18n="analyzerNote">
+                This tool offers educational interpretation only and should not be used as a diagnosis.
+              </p>
+
+              <div class="field-group">
+                <label for="gene-search" data-i18n="labelGene">Gene symbol</label>
+                <input
+                  id="gene-search"
+                  name="gene"
+                  type="text"
+                  list="gene-suggestions"
+                  placeholder="TP53"
+                  autocomplete="off"
+                  spellcheck="false"
+                  required
+                />
+                <datalist id="gene-suggestions"></datalist>
+                <p id="gene-search-hint" class="field-hint">
+                  Start typing a human gene symbol. Suggestions come from live MyGene.info results.
+                </p>
+              </div>
+
+              <div class="field-group">
+                <label for="variant-input">Variant identifier</label>
+                <input
+                  id="variant-input"
+                  name="variant"
+                  type="text"
+                  placeholder="rs121913343"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <p class="field-hint">
+                  Optional. Best support is currently available for rsIDs through live MyVariant.info lookup.
+                </p>
+              </div>
+
+              <div class="field-group">
+                <span class="field-label" id="symptoms-label" data-i18n="labelSymptoms">Symptoms</span>
+                <div id="symptom-options" class="chip-grid" role="group" aria-labelledby="symptoms-label"></div>
+              </div>
+
+              <div class="field-group">
+                <label for="age-group" data-i18n="labelAge">Age group</label>
+                <select id="age-group" name="ageGroup">
+                  <option value="under-40">Under 40</option>
+                  <option value="40-60" selected>40 to 60</option>
+                  <option value="over-60">Over 60</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="family-history" data-i18n="labelFamily">Family history</label>
+                <select id="family-history" name="familyHistory">
+                  <option value="no" selected>No known family history</option>
+                  <option value="yes">Known family history of cancer</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="smoking-status" data-i18n="labelSmoking">Smoking status</label>
+                <select id="smoking-status" name="smokingStatus">
+                  <option value="never" selected>Never</option>
+                  <option value="former">Former smoker</option>
+                  <option value="current">Current smoker</option>
+                </select>
+              </div>
+
+              <button type="submit" class="button button-primary button-full">
+                <span data-i18n="runInterpretation">Run live interpretation</span>
+              </button>
+              <p id="loading-state" class="loading-state hidden">Fetching live genomic data...</p>
+              <p id="error-state" class="error-state hidden" role="alert"></p>
+            </form>
+
+            <div class="results-column">
+              <section class="result-panel" aria-live="polite">
+                <div class="panel-label" data-i18n="panelOutput">Interpretation output</div>
+                <div id="result-state" class="result-empty" data-i18n="resultEmpty">
+                  Search for a live gene to generate an educational interpretation.
+                </div>
+                <div id="result-content" class="result-content hidden">
+                  <div class="risk-row">
+                    <div>
+                      <p class="meta-label" data-i18n="metaRiskLevel">Educational risk level</p>
+                      <h3 id="risk-level"></h3>
+                    </div>
+                    <div class="risk-score">
+                      <span class="meta-label" data-i18n="metaCompositeScore">Composite score</span>
+                      <strong id="risk-score"></strong>
+                    </div>
+                  </div>
+
+                  <div class="evidence-bar" aria-hidden="true">
+                    <div id="risk-bar-fill" class="evidence-bar-fill"></div>
+                  </div>
+
+                  <div class="source-pill-row" id="source-pill-row"></div>
+
+                  <div class="live-cards">
+                    <article class="live-card">
+                      <span class="meta-label">Live gene profile</span>
+                      <h4 id="gene-card-title">Gene</h4>
+                      <p id="gene-card-summary"></p>
+                      <ul id="gene-metadata" class="detail-list"></ul>
+                    </article>
+                    <article class="live-card">
+                      <span class="meta-label">Live variant profile</span>
+                      <h4 id="variant-card-title">Variant</h4>
+                      <p id="variant-card-summary">No variant selected.</p>
+                      <ul id="variant-metadata" class="detail-list"></ul>
+                    </article>
+                  </div>
+
+                  <div class="output-block">
+                    <span class="meta-label" data-i18n="metaBiology">What may be happening biologically</span>
+                    <p id="biology-summary"></p>
+                  </div>
+
+                  <div class="output-block">
+                    <span class="meta-label" data-i18n="metaSimple">Why it matters in simple terms</span>
+                    <p id="plain-language-summary"></p>
+                  </div>
+
+                  <div class="output-block">
+                    <span class="meta-label" data-i18n="metaTakeaway">Takeaway</span>
+                    <p id="takeaway-summary"></p>
+                  </div>
+
+                  <div class="output-block">
+                    <span class="meta-label" data-i18n="metaReasoning">Reasoning signals</span>
+                    <ul id="reasoning-list" class="reasoning-list"></ul>
+                  </div>
+
+                  <div class="output-block">
+                    <span class="meta-label" data-i18n="metaEvidence">Evidence basis</span>
+                    <p id="evidence-note"></p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="chat-panel">
+                <div class="panel-label" data-i18n="panelFollowUp">Follow-up assistant</div>
+                <p class="chat-intro" data-i18n="chatIntro">
+                  Ask a plain-language follow-up about the current result.
+                </p>
+                <form id="chat-form" class="chat-form">
+                  <input
+                    id="chat-input"
+                    type="text"
+                    placeholder="Why does this mutation matter?"
+                    autocomplete="off"
+                    aria-label="Ask a follow-up question"
+                  />
+                  <button type="submit" class="button button-secondary" data-i18n="askButton">Ask</button>
+                </form>
+                <div id="chat-log" class="chat-log" aria-live="polite">
+                  <div class="chat-message assistant">
+                    I can explain the latest live genomic result, variant significance, symptom overlap, or care context in simpler language.
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section id="support" class="section">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="supportEyebrow">Support</p>
+            <h2 data-i18n="supportTitle">General care and support guidance without prescription.</h2>
+            <p data-i18n="supportText">
+              These guides focus on understanding, communication, and supportive care
+              topics that commonly matter around cancer journeys.
+            </p>
+          </div>
+          <div id="support-grid" class="support-grid"></div>
+        </section>
+
+        <section class="section validation-section">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="validationEyebrow">Validation</p>
+            <h2 data-i18n="validationTitle">Grounded in live public genomics sources, presented with clear limits.</h2>
+          </div>
+          <div class="validation-grid">
+            <div class="validation-card">
+              <h3 data-i18n="validationReasoningTitle">Live sources</h3>
+              <p data-i18n="validationReasoningText">
+                Gene search and gene summaries come from MyGene.info and Ensembl.
+                Variant evidence is fetched from MyVariant.info when a supported
+                identifier is provided.
+              </p>
+            </div>
+            <div class="validation-card">
+              <h3 data-i18n="validationLimitTitle">Interpretation limit</h3>
+              <p data-i18n="validationLimitText">
+                Scores are educational summaries, not predictions of diagnosis,
+                prognosis, or treatment response.
+              </p>
+            </div>
+            <div class="validation-card">
+              <h3 data-i18n="validationEthicsTitle">Ethical boundary</h3>
+              <p data-i18n="validationEthicsText">
+                Onco.AI is intentionally framed as an interpreter between medical data
+                and human understanding, not a replacement for clinical judgment.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
